@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float movementY;
 
     public Text scoreText;
+    public GameObject winTextObject;
     int score;
 
 
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        scoreText.text = "Score: 0";
+        winTextObject.SetActive(false);
         
     }
 
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        
+        Destroy(other.gameObject);
+        score++;
+        scoreText.text = "Score: " + score.ToString();
+        if(score == 12){
+            winTextObject.SetActive(true);
+        }
     }
 }
